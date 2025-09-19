@@ -27,9 +27,9 @@ configure<PublishingExtension> {
                 }
 
                 scm {
-                    connection.set("scm:git:git://github.com/stainless-sdks/legalesign-java.git")
-                    developerConnection.set("scm:git:git://github.com/stainless-sdks/legalesign-java.git")
-                    url.set("https://github.com/stainless-sdks/legalesign-java")
+                    connection.set("scm:git:git://github.com/legalesign/legalesign-rest-java.git")
+                    developerConnection.set("scm:git:git://github.com/legalesign/legalesign-rest-java.git")
+                    url.set("https://github.com/legalesign/legalesign-rest-java")
                 }
 
                 versionMapping {
