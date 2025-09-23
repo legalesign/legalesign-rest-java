@@ -8,7 +8,7 @@ repositories {
 }
 
 allprojects {
-    group = "com.legalesign.api"
+    group = "com.legalesign_sdk.api"
     version = "0.0.2" // x-release-please-version
 }
 
@@ -32,7 +32,7 @@ subprojects {
 // Avoid race conditions between `dokkaJavadocCollector` and `dokkaJavadocJar` tasks
 tasks.named("dokkaJavadocCollector").configure {
     subprojects.flatMap { it.tasks }
-        .filter { it.project.name != "legalesign-java" && it.name == "dokkaJavadocJar" }
+        .filter { it.project.name != "legalesign-sdk-java" && it.name == "dokkaJavadocJar" }
         .forEach { mustRunAfter(it) }
 }
 
