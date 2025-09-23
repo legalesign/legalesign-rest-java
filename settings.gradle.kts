@@ -1,11 +1,11 @@
-rootProject.name = "legalesign-java-root"
+rootProject.name = "legalesign-sdk-java-root"
 
 val projectNames = rootDir.listFiles()
     ?.asSequence()
     .orEmpty()
     .filter { file ->
         file.isDirectory &&
-        file.name.startsWith("legalesign-java") &&
+        file.name.startsWith("legalesign-sdk-java") &&
         file.listFiles()?.asSequence().orEmpty().any { it.name == "build.gradle.kts" }
     }
     .map { it.name }
