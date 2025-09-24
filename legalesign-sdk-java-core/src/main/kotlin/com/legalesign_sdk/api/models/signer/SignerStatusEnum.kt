@@ -10,17 +10,17 @@ import kotlin.jvm.optionals.getOrNull
 
 /**
  * Signer status options:
- * - 4 - unsent
- * - 5 - scheduled to be sent
- * - 10 - sent
- * - 15 - email opened
- * - 20 - visited
- * - 30 - fields complete
- * - 35 - fields complete ex signature
- * - 39 - waiting for witness to complete
- * - 40 - signed
- * - 50 - downloaded
- * - 60 - rejected
+ * * 4 - unsent
+ * * 5 - scheduled to be sent
+ * * 10 - sent
+ * * 15 - email opened
+ * * 20 - visited
+ * * 30 - fields complete
+ * * 35 - fields complete ex signature
+ * * 39 - waiting for witness to complete
+ * * 40 - signed
+ * * 50 - downloaded
+ * * 60 - rejected
  */
 class SignerStatusEnum @JsonCreator private constructor(private val value: JsonField<Long>) : Enum {
 
