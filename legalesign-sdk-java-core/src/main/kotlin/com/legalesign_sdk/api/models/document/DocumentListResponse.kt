@@ -397,11 +397,11 @@ private constructor(
 
         /**
          * Document status options:
-         * - 10 - Initial state, check signer status for sent/unsent
-         * - 20 - Fields completed
-         * - 30 - Signed
-         * - 40 - Removed (before signing)
-         * - 50 - Rejected
+         * * 10 - Initial state, check signer status for sent/unsent
+         * * 20 - Fields completed
+         * * 30 - Signed
+         * * 40 - Removed (before signing)
+         * * 50 - Rejected
          *
          * @throws LegalesignSdkInvalidDataException if the JSON field has an unexpected type (e.g.
          *   if the server responded with an unexpected value).
@@ -915,11 +915,11 @@ private constructor(
 
             /**
              * Document status options:
-             * - 10 - Initial state, check signer status for sent/unsent
-             * - 20 - Fields completed
-             * - 30 - Signed
-             * - 40 - Removed (before signing)
-             * - 50 - Rejected
+             * * 10 - Initial state, check signer status for sent/unsent
+             * * 20 - Fields completed
+             * * 30 - Signed
+             * * 40 - Removed (before signing)
+             * * 50 - Rejected
              */
             fun status(status: DocumentStatusEnum) = status(JsonField.of(status))
 
