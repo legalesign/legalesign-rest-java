@@ -10,11 +10,11 @@ import kotlin.jvm.optionals.getOrNull
 
 /**
  * Document status options:
- * - 10 - Initial state, check signer status for sent/unsent
- * - 20 - Fields completed
- * - 30 - Signed
- * - 40 - Removed (before signing)
- * - 50 - Rejected
+ * * 10 - Initial state, check signer status for sent/unsent
+ * * 20 - Fields completed
+ * * 30 - Signed
+ * * 40 - Removed (before signing)
+ * * 50 - Rejected
  */
 class DocumentStatusEnum @JsonCreator private constructor(private val value: JsonField<Long>) :
     Enum {

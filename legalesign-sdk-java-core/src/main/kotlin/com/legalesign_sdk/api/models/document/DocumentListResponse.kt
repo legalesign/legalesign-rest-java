@@ -21,6 +21,7 @@ import java.util.Optional
 import kotlin.jvm.optionals.getOrNull
 
 class DocumentListResponse
+@JsonCreator(mode = JsonCreator.Mode.DISABLED)
 private constructor(
     private val meta: JsonField<ListMeta>,
     private val objects: JsonField<List<Object>>,
@@ -189,6 +190,7 @@ private constructor(
             (objects.asKnown().getOrNull()?.sumOf { it.validity().toInt() } ?: 0)
 
     class Object
+    @JsonCreator(mode = JsonCreator.Mode.DISABLED)
     private constructor(
         private val archived: JsonField<Boolean>,
         private val autoArchive: JsonField<Boolean>,
@@ -397,11 +399,11 @@ private constructor(
 
         /**
          * Document status options:
-         * - 10 - Initial state, check signer status for sent/unsent
-         * - 20 - Fields completed
-         * - 30 - Signed
-         * - 40 - Removed (before signing)
-         * - 50 - Rejected
+         * * 10 - Initial state, check signer status for sent/unsent
+         * * 20 - Fields completed
+         * * 30 - Signed
+         * * 40 - Removed (before signing)
+         * * 50 - Rejected
          *
          * @throws LegalesignSdkInvalidDataException if the JSON field has an unexpected type (e.g.
          *   if the server responded with an unexpected value).
@@ -915,11 +917,11 @@ private constructor(
 
             /**
              * Document status options:
-             * - 10 - Initial state, check signer status for sent/unsent
-             * - 20 - Fields completed
-             * - 30 - Signed
-             * - 40 - Removed (before signing)
-             * - 50 - Rejected
+             * * 10 - Initial state, check signer status for sent/unsent
+             * * 20 - Fields completed
+             * * 30 - Signed
+             * * 40 - Removed (before signing)
+             * * 50 - Rejected
              */
             fun status(status: DocumentStatusEnum) = status(JsonField.of(status))
 
