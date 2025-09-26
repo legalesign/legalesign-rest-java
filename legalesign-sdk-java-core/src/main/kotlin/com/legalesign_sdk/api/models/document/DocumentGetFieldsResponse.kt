@@ -18,6 +18,7 @@ import java.util.Optional
 import kotlin.jvm.optionals.getOrNull
 
 class DocumentGetFieldsResponse
+@JsonCreator(mode = JsonCreator.Mode.DISABLED)
 private constructor(
     private val elementType: JsonField<ElementType>,
     private val fieldorder: JsonField<Long>,

@@ -21,6 +21,7 @@ import java.util.Optional
 import kotlin.jvm.optionals.getOrNull
 
 class TemplateListResponse
+@JsonCreator(mode = JsonCreator.Mode.DISABLED)
 private constructor(
     private val meta: JsonField<ListMeta>,
     private val objects: JsonField<List<Object>>,
@@ -189,6 +190,7 @@ private constructor(
             (objects.asKnown().getOrNull()?.sumOf { it.validity().toInt() } ?: 0)
 
     class Object
+    @JsonCreator(mode = JsonCreator.Mode.DISABLED)
     private constructor(
         private val archive: JsonField<Boolean>,
         private val created: JsonField<OffsetDateTime>,

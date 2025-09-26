@@ -23,6 +23,7 @@ import java.util.Optional
 import kotlin.jvm.optionals.getOrNull
 
 class FieldListResponse
+@JsonCreator(mode = JsonCreator.Mode.DISABLED)
 private constructor(
     private val meta: JsonField<ListMeta>,
     private val objects: JsonField<List<Object>>,
@@ -191,6 +192,7 @@ private constructor(
             (objects.asKnown().getOrNull()?.sumOf { it.validity().toInt() } ?: 0)
 
     class Object
+    @JsonCreator(mode = JsonCreator.Mode.DISABLED)
     private constructor(
         private val ax: JsonField<Float>,
         private val ay: JsonField<Float>,
