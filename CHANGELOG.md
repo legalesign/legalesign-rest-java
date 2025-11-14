@@ -1,5 +1,20 @@
 # Changelog
 
+## 0.0.3 (2025-11-14)
+
+Full Changelog: [v0.0.2...v0.0.3](https://github.com/legalesign/legalesign-rest-java/compare/v0.0.2...v0.0.3)
+
+### Bug Fixes
+
+* **client:** add missing additional properties fields ([3b40c1c](https://github.com/legalesign/legalesign-rest-java/commit/3b40c1c3964a0d5cdf1c02232e8af829d80711cd))
+* **client:** deserialization of empty objects ([3b9a391](https://github.com/legalesign/legalesign-rest-java/commit/3b9a3913bb707b72133b4fe387af702b670490b4))
+* **client:** multi-value header serialization ([eed465e](https://github.com/legalesign/legalesign-rest-java/commit/eed465e514d181f85b2217b7710a761ba9391741))
+
+
+### Chores
+
+* **internal:** change some comment formatting ([ea2dd52](https://github.com/legalesign/legalesign-rest-java/commit/ea2dd52c1273e810f79f550bddaef9c6af986c16))
+
 ## 0.0.2 (2025-09-23)
 
 Full Changelog: [v0.0.1...v0.0.2](https://github.com/legalesign/legalesign-rest-java/compare/v0.0.1...v0.0.2)
