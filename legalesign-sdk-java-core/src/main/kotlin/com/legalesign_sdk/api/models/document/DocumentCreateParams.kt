@@ -1062,6 +1062,7 @@ private constructor(
      * pdf). Also recommended - do_email, auto_archive and pdftext (if using pdf).
      */
     class Body
+    @JsonCreator(mode = JsonCreator.Mode.DISABLED)
     private constructor(
         private val group: JsonField<String>,
         private val name: JsonField<String>,
@@ -2422,6 +2423,7 @@ private constructor(
     }
 
     class Signer
+    @JsonCreator(mode = JsonCreator.Mode.DISABLED)
     private constructor(
         private val email: JsonField<String>,
         private val firstname: JsonField<String>,
@@ -3119,6 +3121,7 @@ private constructor(
          * case to send a document to a group of people where the first who signs, signs.
          */
         class Reviewer
+        @JsonCreator(mode = JsonCreator.Mode.DISABLED)
         private constructor(
             private val email: JsonField<String>,
             private val firstname: JsonField<String>,

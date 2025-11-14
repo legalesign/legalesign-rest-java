@@ -20,6 +20,7 @@ import java.util.Optional
 import kotlin.jvm.optionals.getOrNull
 
 class TemplatepdfListResponse
+@JsonCreator(mode = JsonCreator.Mode.DISABLED)
 private constructor(
     private val meta: JsonField<ListMeta>,
     private val objects: JsonField<List<TemplatePdf>>,

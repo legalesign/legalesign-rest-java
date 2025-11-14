@@ -17,6 +17,7 @@ import java.util.Optional
 import kotlin.jvm.optionals.getOrNull
 
 class SignerRetrieveResponse
+@JsonCreator(mode = JsonCreator.Mode.DISABLED)
 private constructor(
     private val document: JsonField<String>,
     private val email: JsonField<String>,
@@ -101,17 +102,17 @@ private constructor(
 
     /**
      * Signer status options:
-     * - 4 - unsent
-     * - 5 - scheduled to be sent
-     * - 10 - sent
-     * - 15 - email opened
-     * - 20 - visited
-     * - 30 - fields complete
-     * - 35 - fields complete ex signature
-     * - 39 - waiting for witness to complete
-     * - 40 - signed
-     * - 50 - downloaded
-     * - 60 - rejected
+     * * 4 - unsent
+     * * 5 - scheduled to be sent
+     * * 10 - sent
+     * * 15 - email opened
+     * * 20 - visited
+     * * 30 - fields complete
+     * * 35 - fields complete ex signature
+     * * 39 - waiting for witness to complete
+     * * 40 - signed
+     * * 50 - downloaded
+     * * 60 - rejected
      *
      * @throws LegalesignSdkInvalidDataException if the JSON field has an unexpected type (e.g. if
      *   the server responded with an unexpected value).
@@ -295,17 +296,17 @@ private constructor(
 
         /**
          * Signer status options:
-         * - 4 - unsent
-         * - 5 - scheduled to be sent
-         * - 10 - sent
-         * - 15 - email opened
-         * - 20 - visited
-         * - 30 - fields complete
-         * - 35 - fields complete ex signature
-         * - 39 - waiting for witness to complete
-         * - 40 - signed
-         * - 50 - downloaded
-         * - 60 - rejected
+         * * 4 - unsent
+         * * 5 - scheduled to be sent
+         * * 10 - sent
+         * * 15 - email opened
+         * * 20 - visited
+         * * 30 - fields complete
+         * * 35 - fields complete ex signature
+         * * 39 - waiting for witness to complete
+         * * 40 - signed
+         * * 50 - downloaded
+         * * 60 - rejected
          */
         fun status(status: SignerStatusEnum) = status(JsonField.of(status))
 

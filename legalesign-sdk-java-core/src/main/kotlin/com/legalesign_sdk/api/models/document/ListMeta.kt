@@ -17,6 +17,7 @@ import java.util.Optional
 import kotlin.jvm.optionals.getOrNull
 
 class ListMeta
+@JsonCreator(mode = JsonCreator.Mode.DISABLED)
 private constructor(
     private val limit: JsonField<Int>,
     private val next: JsonField<String>,

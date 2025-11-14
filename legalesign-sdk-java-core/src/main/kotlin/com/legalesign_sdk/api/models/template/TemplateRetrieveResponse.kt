@@ -17,6 +17,7 @@ import java.util.Objects
 import java.util.Optional
 
 class TemplateRetrieveResponse
+@JsonCreator(mode = JsonCreator.Mode.DISABLED)
 private constructor(
     private val archive: JsonField<Boolean>,
     private val created: JsonField<OffsetDateTime>,

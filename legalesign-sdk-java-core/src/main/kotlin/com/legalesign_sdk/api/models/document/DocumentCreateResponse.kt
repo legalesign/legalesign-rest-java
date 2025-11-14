@@ -16,6 +16,7 @@ import java.util.Objects
 import java.util.Optional
 
 class DocumentCreateResponse
+@JsonCreator(mode = JsonCreator.Mode.DISABLED)
 private constructor(
     private val signer1: JsonField<String>,
     private val additionalProperties: MutableMap<String, JsonValue>,

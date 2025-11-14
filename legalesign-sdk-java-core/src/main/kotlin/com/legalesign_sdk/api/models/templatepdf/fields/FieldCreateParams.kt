@@ -2,12 +2,15 @@
 
 package com.legalesign_sdk.api.models.templatepdf.fields
 
+import com.fasterxml.jackson.annotation.JsonAnyGetter
+import com.fasterxml.jackson.annotation.JsonAnySetter
 import com.fasterxml.jackson.annotation.JsonCreator
 import com.fasterxml.jackson.annotation.JsonProperty
 import com.legalesign_sdk.api.core.Enum
 import com.legalesign_sdk.api.core.ExcludeMissing
 import com.legalesign_sdk.api.core.JsonField
 import com.legalesign_sdk.api.core.JsonMissing
+import com.legalesign_sdk.api.core.JsonValue
 import com.legalesign_sdk.api.core.Params
 import com.legalesign_sdk.api.core.checkRequired
 import com.legalesign_sdk.api.core.http.Headers
@@ -15,6 +18,7 @@ import com.legalesign_sdk.api.core.http.QueryParams
 import com.legalesign_sdk.api.core.toImmutable
 import com.legalesign_sdk.api.errors.LegalesignSdkInvalidDataException
 import com.legalesign_sdk.api.models.document.PdfFieldValidationEnum
+import java.util.Collections
 import java.util.Objects
 import java.util.Optional
 import kotlin.jvm.optionals.getOrNull
@@ -217,37 +221,102 @@ private constructor(
     override fun _queryParams(): QueryParams = additionalQueryParams
 
     class Body
-    @JsonCreator
+    @JsonCreator(mode = JsonCreator.Mode.DISABLED)
     private constructor(
-        @JsonProperty("ax") @ExcludeMissing private val ax: JsonField<Float>,
-        @JsonProperty("ay") @ExcludeMissing private val ay: JsonField<Float>,
-        @JsonProperty("bx") @ExcludeMissing private val bx: JsonField<Float>,
-        @JsonProperty("by") @ExcludeMissing private val by: JsonField<Float>,
-        @JsonProperty("element_type")
-        @ExcludeMissing
+        private val ax: JsonField<Float>,
+        private val ay: JsonField<Float>,
+        private val bx: JsonField<Float>,
+        private val by: JsonField<Float>,
         private val elementType: JsonField<ElementType>,
-        @JsonProperty("page") @ExcludeMissing private val page: JsonField<Int>,
-        @JsonProperty("signer") @ExcludeMissing private val signer: JsonField<Int>,
-        @JsonProperty("align") @ExcludeMissing private val align: JsonField<Align>,
-        @JsonProperty("fieldorder") @ExcludeMissing private val fieldorder: JsonField<Int>,
-        @JsonProperty("font_name") @ExcludeMissing private val fontName: JsonField<FontName>,
-        @JsonProperty("font_size") @ExcludeMissing private val fontSize: JsonField<Int>,
-        @JsonProperty("hide_border") @ExcludeMissing private val hideBorder: JsonField<Boolean>,
-        @JsonProperty("label") @ExcludeMissing private val label: JsonField<String>,
-        @JsonProperty("label_extra") @ExcludeMissing private val labelExtra: JsonField<String>,
-        @JsonProperty("logic_action")
-        @ExcludeMissing
+        private val page: JsonField<Int>,
+        private val signer: JsonField<Int>,
+        private val align: JsonField<Align>,
+        private val fieldorder: JsonField<Int>,
+        private val fontName: JsonField<FontName>,
+        private val fontSize: JsonField<Int>,
+        private val hideBorder: JsonField<Boolean>,
+        private val label: JsonField<String>,
+        private val labelExtra: JsonField<String>,
         private val logicAction: JsonField<LogicAction>,
-        @JsonProperty("logic_group") @ExcludeMissing private val logicGroup: JsonField<String>,
-        @JsonProperty("map_to") @ExcludeMissing private val mapTo: JsonField<String>,
-        @JsonProperty("optional") @ExcludeMissing private val optional: JsonField<Boolean>,
-        @JsonProperty("options") @ExcludeMissing private val options: JsonField<String>,
-        @JsonProperty("substantive") @ExcludeMissing private val substantive: JsonField<Boolean>,
-        @JsonProperty("validation")
-        @ExcludeMissing
+        private val logicGroup: JsonField<String>,
+        private val mapTo: JsonField<String>,
+        private val optional: JsonField<Boolean>,
+        private val options: JsonField<String>,
+        private val substantive: JsonField<Boolean>,
         private val validation: JsonField<PdfFieldValidationEnum>,
-        @JsonProperty("value") @ExcludeMissing private val value: JsonField<String>,
+        private val value: JsonField<String>,
+        private val additionalProperties: MutableMap<String, JsonValue>,
     ) {
+
+        @JsonCreator
+        private constructor(
+            @JsonProperty("ax") @ExcludeMissing ax: JsonField<Float> = JsonMissing.of(),
+            @JsonProperty("ay") @ExcludeMissing ay: JsonField<Float> = JsonMissing.of(),
+            @JsonProperty("bx") @ExcludeMissing bx: JsonField<Float> = JsonMissing.of(),
+            @JsonProperty("by") @ExcludeMissing by: JsonField<Float> = JsonMissing.of(),
+            @JsonProperty("element_type")
+            @ExcludeMissing
+            elementType: JsonField<ElementType> = JsonMissing.of(),
+            @JsonProperty("page") @ExcludeMissing page: JsonField<Int> = JsonMissing.of(),
+            @JsonProperty("signer") @ExcludeMissing signer: JsonField<Int> = JsonMissing.of(),
+            @JsonProperty("align") @ExcludeMissing align: JsonField<Align> = JsonMissing.of(),
+            @JsonProperty("fieldorder")
+            @ExcludeMissing
+            fieldorder: JsonField<Int> = JsonMissing.of(),
+            @JsonProperty("font_name")
+            @ExcludeMissing
+            fontName: JsonField<FontName> = JsonMissing.of(),
+            @JsonProperty("font_size") @ExcludeMissing fontSize: JsonField<Int> = JsonMissing.of(),
+            @JsonProperty("hide_border")
+            @ExcludeMissing
+            hideBorder: JsonField<Boolean> = JsonMissing.of(),
+            @JsonProperty("label") @ExcludeMissing label: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("label_extra")
+            @ExcludeMissing
+            labelExtra: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("logic_action")
+            @ExcludeMissing
+            logicAction: JsonField<LogicAction> = JsonMissing.of(),
+            @JsonProperty("logic_group")
+            @ExcludeMissing
+            logicGroup: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("map_to") @ExcludeMissing mapTo: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("optional")
+            @ExcludeMissing
+            optional: JsonField<Boolean> = JsonMissing.of(),
+            @JsonProperty("options") @ExcludeMissing options: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("substantive")
+            @ExcludeMissing
+            substantive: JsonField<Boolean> = JsonMissing.of(),
+            @JsonProperty("validation")
+            @ExcludeMissing
+            validation: JsonField<PdfFieldValidationEnum> = JsonMissing.of(),
+            @JsonProperty("value") @ExcludeMissing value: JsonField<String> = JsonMissing.of(),
+        ) : this(
+            ax,
+            ay,
+            bx,
+            by,
+            elementType,
+            page,
+            signer,
+            align,
+            fieldorder,
+            fontName,
+            fontSize,
+            hideBorder,
+            label,
+            labelExtra,
+            logicAction,
+            logicGroup,
+            mapTo,
+            optional,
+            options,
+            substantive,
+            validation,
+            value,
+            mutableMapOf(),
+        )
 
         /**
          * % of page width - left vertical: 0 = left page edge, 1 = right page edge
@@ -282,8 +351,8 @@ private constructor(
         fun by(): Float = by.getRequired("by")
 
         /**
-         * Must be one of the following: _ signature - signature field _ initials - initials field _
-         * text - signer field (field for signer to complete) _ admin - sender field (field to
+         * Must be one of the following: * signature - signature field * initials - initials field *
+         * text - signer field (field for signer to complete) * admin - sender field (field to
          * complete by admin user when sending, use pdftext)
          *
          * @throws LegalesignSdkInvalidDataException if the JSON field has an unexpected type or is
@@ -309,9 +378,9 @@ private constructor(
 
         /**
          * one of the following:
-         * - 1 - left
-         * - 2 - middle
-         * - 3 - right
+         * * 1 - left
+         * * 2 - middle
+         * * 3 - right
          *
          * @throws LegalesignSdkInvalidDataException if the JSON field has an unexpected type (e.g.
          *   if the server responded with an unexpected value).
@@ -413,87 +482,87 @@ private constructor(
 
         /**
          * fields types and validations:
-         * - 1 - Email
-         * - 2 - yyyy/mm/dd
-         * - 3 - yy/mm/dd
-         * - 4 - dd/mm/yyyy
-         * - 5 - dd/mm/yy
-         * - 6 - mm/dd/yy
-         * - 7 - mm/dd/yy
-         * - 8 - yyyy.mm.dd
-         * - 9 - yy.mm.dd
-         * - 10 - dd.mm.yyyy
-         * - 11 - dd.mm.yy
-         * - 12 - mm.dd.yyyy
-         * - 13 - mm.dd.yy
-         * - 14 - yyyy-mm-dd
-         * - 15 - yy-mm-dd
-         * - 16 - dd-mm-yyyy
-         * - 17 - dd-mm-yy
-         * - 18 - mm-dd-yyyy
-         * - 19 - mm-dd-yy
-         * - 20 - Dropdown list, use options attribute for items
-         * - 24 - Checkbox tick/cross
-         * - 25 - Checkbox tick/blank
-         * - 26 - Checkbox cross/blank
-         * - 30 - yyyy/mm/dd (automatic)
-         * - 31 - yy/mm/dd (automatic)
-         * - 32 - dd/yy/yyyy (automatic)
-         * - 33 - dd/mm/yy (automatic)
-         * - 34 - mm/dd/yyyy (automatic)
-         * - 35 - mm/dd/yy (automatic)
-         * - 36 - yyyy.mm.dd (automatic)
-         * - 37 - yy.mm.dd (automatic)
-         * - 38 - dd.mm.yyyy (automatic)
-         * - 39 - dd.mm.yy (automatic)
-         * - 40 - mm.dd.yyyy (automatic)
-         * - 41 - mm.dd.yy (automatic)
-         * - 42 - yyyy-mm-dd (automatic)
-         * - 43 - yy-mm-dd (automatic)
-         * - 44 - dd-mm-yyyy (automatic)
-         * - 45 - dd-mm-yy (automatic)
-         * - 46 - mm-dd-yyyy (automatic)
-         * - 47 - mm-dd-yy (automatic)
-         * - 48 - d mmmmm yyyy (automatic)
-         * - 50 - Whole number
-         * - 51 - Number
-         * - 52 - Currency (2 decimals)
-         * - 53 - 1 number
-         * - 54 - 2 numbers
-         * - 55 - 3 numbers
-         * - 56 - 4 numbers
-         * - 57 - 5 numbers
-         * - 58 - 6 numbers
-         * - 59 - 7 numbers
-         * - 60 - 8 numbers
-         * - 61 - 9 numbers
-         * - 62 - 10 numbers
-         * - 63 - 11 numbers
-         * - 64 - 12 numbers
-         * - 65 - 1 characters (any text)
-         * - 66 - 2 characters (any text)
-         * - 67 - 3 characters (any text)
-         * - 68 - 4 characters (any text)
-         * - 69 - 5 characters (any text)
-         * - 70 - 6 characters (any text)
-         * - 71 - 7 characters (any text)
-         * - 72 - 8 characters (any text)
-         * - 73 - secret code, add code in options
-         * - 74 - file attach, append to email to signer
-         * - 75 - file attach, append to final PDF
-         * - 76 - file attach, zip with final PDF for internal use, but not signer
-         * - 77 - force to title caps
-         * - 78 - force to uppercase
-         * - 79 - force to lowercase
-         * - 80 - mm/yy
-         * - 81 - mm/yyyy
-         * - 82 - mm.yy
-         * - 83 - mm.yyyy
-         * - 84 - mm-yy
-         * - 85 - mm-yyyy
-         * - 90 - drawn field
-         * - 91 - countries list
-         * - 92 - honorifics list
+         * * 1 - Email
+         * * 2 - yyyy/mm/dd
+         * * 3 - yy/mm/dd
+         * * 4 - dd/mm/yyyy
+         * * 5 - dd/mm/yy
+         * * 6 - mm/dd/yy
+         * * 7 - mm/dd/yy
+         * * 8 - yyyy.mm.dd
+         * * 9 - yy.mm.dd
+         * * 10 - dd.mm.yyyy
+         * * 11 - dd.mm.yy
+         * * 12 - mm.dd.yyyy
+         * * 13 - mm.dd.yy
+         * * 14 - yyyy-mm-dd
+         * * 15 - yy-mm-dd
+         * * 16 - dd-mm-yyyy
+         * * 17 - dd-mm-yy
+         * * 18 - mm-dd-yyyy
+         * * 19 - mm-dd-yy
+         * * 20 - Dropdown list, use options attribute for items
+         * * 24 - Checkbox tick/cross
+         * * 25 - Checkbox tick/blank
+         * * 26 - Checkbox cross/blank
+         * * 30 - yyyy/mm/dd (automatic)
+         * * 31 - yy/mm/dd (automatic)
+         * * 32 - dd/yy/yyyy (automatic)
+         * * 33 - dd/mm/yy (automatic)
+         * * 34 - mm/dd/yyyy (automatic)
+         * * 35 - mm/dd/yy (automatic)
+         * * 36 - yyyy.mm.dd (automatic)
+         * * 37 - yy.mm.dd (automatic)
+         * * 38 - dd.mm.yyyy (automatic)
+         * * 39 - dd.mm.yy (automatic)
+         * * 40 - mm.dd.yyyy (automatic)
+         * * 41 - mm.dd.yy (automatic)
+         * * 42 - yyyy-mm-dd (automatic)
+         * * 43 - yy-mm-dd (automatic)
+         * * 44 - dd-mm-yyyy (automatic)
+         * * 45 - dd-mm-yy (automatic)
+         * * 46 - mm-dd-yyyy (automatic)
+         * * 47 - mm-dd-yy (automatic)
+         * * 48 - d mmmmm yyyy (automatic)
+         * * 50 - Whole number
+         * * 51 - Number
+         * * 52 - Currency (2 decimals)
+         * * 53 - 1 number
+         * * 54 - 2 numbers
+         * * 55 - 3 numbers
+         * * 56 - 4 numbers
+         * * 57 - 5 numbers
+         * * 58 - 6 numbers
+         * * 59 - 7 numbers
+         * * 60 - 8 numbers
+         * * 61 - 9 numbers
+         * * 62 - 10 numbers
+         * * 63 - 11 numbers
+         * * 64 - 12 numbers
+         * * 65 - 1 characters (any text)
+         * * 66 - 2 characters (any text)
+         * * 67 - 3 characters (any text)
+         * * 68 - 4 characters (any text)
+         * * 69 - 5 characters (any text)
+         * * 70 - 6 characters (any text)
+         * * 71 - 7 characters (any text)
+         * * 72 - 8 characters (any text)
+         * * 73 - secret code, add code in options
+         * * 74 - file attach, append to email to signer
+         * * 75 - file attach, append to final PDF
+         * * 76 - file attach, zip with final PDF for internal use, but not signer
+         * * 77 - force to title caps
+         * * 78 - force to uppercase
+         * * 79 - force to lowercase
+         * * 80 - mm/yy
+         * * 81 - mm/yyyy
+         * * 82 - mm.yy
+         * * 83 - mm.yyyy
+         * * 84 - mm-yy
+         * * 85 - mm-yyyy
+         * * 90 - drawn field
+         * * 91 - countries list
+         * * 92 - honorifics list
          *
          * @throws LegalesignSdkInvalidDataException if the JSON field has an unexpected type (e.g.
          *   if the server responded with an unexpected value).
@@ -675,6 +744,16 @@ private constructor(
          */
         @JsonProperty("value") @ExcludeMissing fun _value(): JsonField<String> = value
 
+        @JsonAnySetter
+        private fun putAdditionalProperty(key: String, value: JsonValue) {
+            additionalProperties.put(key, value)
+        }
+
+        @JsonAnyGetter
+        @ExcludeMissing
+        fun _additionalProperties(): Map<String, JsonValue> =
+            Collections.unmodifiableMap(additionalProperties)
+
         fun toBuilder() = Builder().from(this)
 
         companion object {
@@ -721,6 +800,7 @@ private constructor(
             private var substantive: JsonField<Boolean> = JsonMissing.of()
             private var validation: JsonField<PdfFieldValidationEnum> = JsonMissing.of()
             private var value: JsonField<String> = JsonMissing.of()
+            private var additionalProperties: MutableMap<String, JsonValue> = mutableMapOf()
 
             @JvmSynthetic
             internal fun from(body: Body) = apply {
@@ -746,6 +826,7 @@ private constructor(
                 substantive = body.substantive
                 validation = body.validation
                 value = body.value
+                additionalProperties = body.additionalProperties.toMutableMap()
             }
 
             /** % of page width - left vertical: 0 = left page edge, 1 = right page edge */
@@ -797,8 +878,8 @@ private constructor(
             fun by(by: JsonField<Float>) = apply { this.by = by }
 
             /**
-             * Must be one of the following: _ signature - signature field _ initials - initials
-             * field _ text - signer field (field for signer to complete) _ admin - sender field
+             * Must be one of the following: * signature - signature field * initials - initials
+             * field * text - signer field (field for signer to complete) * admin - sender field
              * (field to complete by admin user when sending, use pdftext)
              */
             fun elementType(elementType: ElementType) = elementType(JsonField.of(elementType))
@@ -840,9 +921,9 @@ private constructor(
 
             /**
              * one of the following:
-             * - 1 - left
-             * - 2 - middle
-             * - 3 - right
+             * * 1 - left
+             * * 2 - middle
+             * * 3 - right
              */
             fun align(align: Align?) = align(JsonField.ofNullable(align))
 
@@ -1023,87 +1104,87 @@ private constructor(
 
             /**
              * fields types and validations:
-             * - 1 - Email
-             * - 2 - yyyy/mm/dd
-             * - 3 - yy/mm/dd
-             * - 4 - dd/mm/yyyy
-             * - 5 - dd/mm/yy
-             * - 6 - mm/dd/yy
-             * - 7 - mm/dd/yy
-             * - 8 - yyyy.mm.dd
-             * - 9 - yy.mm.dd
-             * - 10 - dd.mm.yyyy
-             * - 11 - dd.mm.yy
-             * - 12 - mm.dd.yyyy
-             * - 13 - mm.dd.yy
-             * - 14 - yyyy-mm-dd
-             * - 15 - yy-mm-dd
-             * - 16 - dd-mm-yyyy
-             * - 17 - dd-mm-yy
-             * - 18 - mm-dd-yyyy
-             * - 19 - mm-dd-yy
-             * - 20 - Dropdown list, use options attribute for items
-             * - 24 - Checkbox tick/cross
-             * - 25 - Checkbox tick/blank
-             * - 26 - Checkbox cross/blank
-             * - 30 - yyyy/mm/dd (automatic)
-             * - 31 - yy/mm/dd (automatic)
-             * - 32 - dd/yy/yyyy (automatic)
-             * - 33 - dd/mm/yy (automatic)
-             * - 34 - mm/dd/yyyy (automatic)
-             * - 35 - mm/dd/yy (automatic)
-             * - 36 - yyyy.mm.dd (automatic)
-             * - 37 - yy.mm.dd (automatic)
-             * - 38 - dd.mm.yyyy (automatic)
-             * - 39 - dd.mm.yy (automatic)
-             * - 40 - mm.dd.yyyy (automatic)
-             * - 41 - mm.dd.yy (automatic)
-             * - 42 - yyyy-mm-dd (automatic)
-             * - 43 - yy-mm-dd (automatic)
-             * - 44 - dd-mm-yyyy (automatic)
-             * - 45 - dd-mm-yy (automatic)
-             * - 46 - mm-dd-yyyy (automatic)
-             * - 47 - mm-dd-yy (automatic)
-             * - 48 - d mmmmm yyyy (automatic)
-             * - 50 - Whole number
-             * - 51 - Number
-             * - 52 - Currency (2 decimals)
-             * - 53 - 1 number
-             * - 54 - 2 numbers
-             * - 55 - 3 numbers
-             * - 56 - 4 numbers
-             * - 57 - 5 numbers
-             * - 58 - 6 numbers
-             * - 59 - 7 numbers
-             * - 60 - 8 numbers
-             * - 61 - 9 numbers
-             * - 62 - 10 numbers
-             * - 63 - 11 numbers
-             * - 64 - 12 numbers
-             * - 65 - 1 characters (any text)
-             * - 66 - 2 characters (any text)
-             * - 67 - 3 characters (any text)
-             * - 68 - 4 characters (any text)
-             * - 69 - 5 characters (any text)
-             * - 70 - 6 characters (any text)
-             * - 71 - 7 characters (any text)
-             * - 72 - 8 characters (any text)
-             * - 73 - secret code, add code in options
-             * - 74 - file attach, append to email to signer
-             * - 75 - file attach, append to final PDF
-             * - 76 - file attach, zip with final PDF for internal use, but not signer
-             * - 77 - force to title caps
-             * - 78 - force to uppercase
-             * - 79 - force to lowercase
-             * - 80 - mm/yy
-             * - 81 - mm/yyyy
-             * - 82 - mm.yy
-             * - 83 - mm.yyyy
-             * - 84 - mm-yy
-             * - 85 - mm-yyyy
-             * - 90 - drawn field
-             * - 91 - countries list
-             * - 92 - honorifics list
+             * * 1 - Email
+             * * 2 - yyyy/mm/dd
+             * * 3 - yy/mm/dd
+             * * 4 - dd/mm/yyyy
+             * * 5 - dd/mm/yy
+             * * 6 - mm/dd/yy
+             * * 7 - mm/dd/yy
+             * * 8 - yyyy.mm.dd
+             * * 9 - yy.mm.dd
+             * * 10 - dd.mm.yyyy
+             * * 11 - dd.mm.yy
+             * * 12 - mm.dd.yyyy
+             * * 13 - mm.dd.yy
+             * * 14 - yyyy-mm-dd
+             * * 15 - yy-mm-dd
+             * * 16 - dd-mm-yyyy
+             * * 17 - dd-mm-yy
+             * * 18 - mm-dd-yyyy
+             * * 19 - mm-dd-yy
+             * * 20 - Dropdown list, use options attribute for items
+             * * 24 - Checkbox tick/cross
+             * * 25 - Checkbox tick/blank
+             * * 26 - Checkbox cross/blank
+             * * 30 - yyyy/mm/dd (automatic)
+             * * 31 - yy/mm/dd (automatic)
+             * * 32 - dd/yy/yyyy (automatic)
+             * * 33 - dd/mm/yy (automatic)
+             * * 34 - mm/dd/yyyy (automatic)
+             * * 35 - mm/dd/yy (automatic)
+             * * 36 - yyyy.mm.dd (automatic)
+             * * 37 - yy.mm.dd (automatic)
+             * * 38 - dd.mm.yyyy (automatic)
+             * * 39 - dd.mm.yy (automatic)
+             * * 40 - mm.dd.yyyy (automatic)
+             * * 41 - mm.dd.yy (automatic)
+             * * 42 - yyyy-mm-dd (automatic)
+             * * 43 - yy-mm-dd (automatic)
+             * * 44 - dd-mm-yyyy (automatic)
+             * * 45 - dd-mm-yy (automatic)
+             * * 46 - mm-dd-yyyy (automatic)
+             * * 47 - mm-dd-yy (automatic)
+             * * 48 - d mmmmm yyyy (automatic)
+             * * 50 - Whole number
+             * * 51 - Number
+             * * 52 - Currency (2 decimals)
+             * * 53 - 1 number
+             * * 54 - 2 numbers
+             * * 55 - 3 numbers
+             * * 56 - 4 numbers
+             * * 57 - 5 numbers
+             * * 58 - 6 numbers
+             * * 59 - 7 numbers
+             * * 60 - 8 numbers
+             * * 61 - 9 numbers
+             * * 62 - 10 numbers
+             * * 63 - 11 numbers
+             * * 64 - 12 numbers
+             * * 65 - 1 characters (any text)
+             * * 66 - 2 characters (any text)
+             * * 67 - 3 characters (any text)
+             * * 68 - 4 characters (any text)
+             * * 69 - 5 characters (any text)
+             * * 70 - 6 characters (any text)
+             * * 71 - 7 characters (any text)
+             * * 72 - 8 characters (any text)
+             * * 73 - secret code, add code in options
+             * * 74 - file attach, append to email to signer
+             * * 75 - file attach, append to final PDF
+             * * 76 - file attach, zip with final PDF for internal use, but not signer
+             * * 77 - force to title caps
+             * * 78 - force to uppercase
+             * * 79 - force to lowercase
+             * * 80 - mm/yy
+             * * 81 - mm/yyyy
+             * * 82 - mm.yy
+             * * 83 - mm.yyyy
+             * * 84 - mm-yy
+             * * 85 - mm-yyyy
+             * * 90 - drawn field
+             * * 91 - countries list
+             * * 92 - honorifics list
              */
             fun validation(validation: PdfFieldValidationEnum?) =
                 validation(JsonField.ofNullable(validation))
@@ -1133,6 +1214,25 @@ private constructor(
              * supported value.
              */
             fun value(value: JsonField<String>) = apply { this.value = value }
+
+            fun additionalProperties(additionalProperties: Map<String, JsonValue>) = apply {
+                this.additionalProperties.clear()
+                putAllAdditionalProperties(additionalProperties)
+            }
+
+            fun putAdditionalProperty(key: String, value: JsonValue) = apply {
+                additionalProperties.put(key, value)
+            }
+
+            fun putAllAdditionalProperties(additionalProperties: Map<String, JsonValue>) = apply {
+                this.additionalProperties.putAll(additionalProperties)
+            }
+
+            fun removeAdditionalProperty(key: String) = apply { additionalProperties.remove(key) }
+
+            fun removeAllAdditionalProperties(keys: Set<String>) = apply {
+                keys.forEach(::removeAdditionalProperty)
+            }
 
             /**
              * Returns an immutable instance of [Body].
@@ -1176,6 +1276,7 @@ private constructor(
                     substantive,
                     validation,
                     value,
+                    additionalProperties.toMutableMap(),
                 )
         }
 
@@ -1251,8 +1352,8 @@ private constructor(
                 (if (value.asKnown().isPresent) 1 else 0)
 
         /**
-         * Must be one of the following: _ signature - signature field _ initials - initials field _
-         * text - signer field (field for signer to complete) _ admin - sender field (field to
+         * Must be one of the following: * signature - signature field * initials - initials field *
+         * text - signer field (field for signer to complete) * admin - sender field (field to
          * complete by admin user when sending, use pdftext)
          */
         class ElementType @JsonCreator private constructor(private val value: JsonField<String>) :
@@ -1400,9 +1501,9 @@ private constructor(
 
         /**
          * one of the following:
-         * - 1 - left
-         * - 2 - middle
-         * - 3 - right
+         * * 1 - left
+         * * 2 - middle
+         * * 3 - right
          */
         class Align @JsonCreator private constructor(private val value: JsonField<Long>) : Enum {
 
@@ -1855,7 +1956,8 @@ private constructor(
                 options == other.options &&
                 substantive == other.substantive &&
                 validation == other.validation &&
-                value == other.value
+                value == other.value &&
+                additionalProperties == other.additionalProperties
         }
 
         private val hashCode: Int by lazy {
@@ -1882,13 +1984,14 @@ private constructor(
                 substantive,
                 validation,
                 value,
+                additionalProperties,
             )
         }
 
         override fun hashCode(): Int = hashCode
 
         override fun toString() =
-            "Body{ax=$ax, ay=$ay, bx=$bx, by=$by, elementType=$elementType, page=$page, signer=$signer, align=$align, fieldorder=$fieldorder, fontName=$fontName, fontSize=$fontSize, hideBorder=$hideBorder, label=$label, labelExtra=$labelExtra, logicAction=$logicAction, logicGroup=$logicGroup, mapTo=$mapTo, optional=$optional, options=$options, substantive=$substantive, validation=$validation, value=$value}"
+            "Body{ax=$ax, ay=$ay, bx=$bx, by=$by, elementType=$elementType, page=$page, signer=$signer, align=$align, fieldorder=$fieldorder, fontName=$fontName, fontSize=$fontSize, hideBorder=$hideBorder, label=$label, labelExtra=$labelExtra, logicAction=$logicAction, logicGroup=$logicGroup, mapTo=$mapTo, optional=$optional, options=$options, substantive=$substantive, validation=$validation, value=$value, additionalProperties=$additionalProperties}"
     }
 
     override fun equals(other: Any?): Boolean {
